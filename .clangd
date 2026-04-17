@@ -2,6 +2,6 @@ CompileFlags:
     Add:
         - "-DSOKOL_D3D11"
         - "-I.\\src\\"
-        - "-I.\\3rdparty\\sokol"
-        - "-I.\\3rdparty\\sokol\\util"
         - "-I.\\3rdparty\\imgui"
+        - "-I.\\3rdparty\\rlImGui"
+        - "-I.\\3rdparty\\raylib\\src"

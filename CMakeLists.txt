@@ -2,18 +2,21 @@ cmake_minimum_required(VERSION 4.0)
 
 project(ludum_dare_59)
 
+add_subdirectory(3rdparty/raylib)
+
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 file(GLOB IMGUI_SOURCES CONFIGURE_DEPENDS 3rdparty/imgui/imgui*.cpp)
-add_executable(ld59 ${SOURCES} ${IMGUI_SOURCES})
-target_include_directories(ld59 PRIVATE src/ 3rdparty/sokol/ 3rdparty/sokol/util/ 3rdparty/imgui/)
-target_link_libraries(ld59)
+set(RLIMGUI_SOURCES
+    3rdparty/rlImGui/rlImGui.cpp
+)
+add_executable(ld59 ${SOURCES} ${IMGUI_SOURCES} ${RLIMGUI_SOURCES})
 
+target_include_directories(ld59 PRIVATE src/ 3rdparty/sokol/ 3rdparty/sokol/util/ 3rdparty/imgui/ 3rdparty/implot/ 3rdparty/implot3d/ 3rdparty/rlImGui/)
 
-if(WIN32)
-   target_compile_definitions(ld59 PRIVATE SOKOL_D3D11=1)
-elseif(EMSCRIPTEN)
+target_link_libraries(ld59 PRIVATE raylib)
+
+if(EMSCRIPTEN)
    set(CMAKE_EXECUTABLE_SUFFIX ".html")
-   target_compile_definitions(ld59 PRIVATE SOKOL_WGPU=1)
    target_link_options(ld59 PRIVATE
         "-sUSE_WEBGPU=1"
         "-O1" #Comment out for release builds
