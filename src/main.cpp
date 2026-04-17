@@ -1,16 +1,3 @@
-/*******************************************************************************************
-*
-*   raylib-extras [ImGui] example - Simple Integration
-*
-*	This is a simple ImGui Integration
-*	It is done using C++ but with C style code
-*	It can be done in C as well if you use the C ImGui wrapper
-*	https://github.com/cimgui/cimgui
-*
-*   Copyright (c) 2021 Jeffery Myers
-*
-********************************************************************************************/
-
 #include "raylib.h"
 #include "raymath.h"
 
@@ -20,41 +7,27 @@
 
 int main(int argc, char* argv[])
 {
-	// Initialization
-	//--------------------------------------------------------------------------------------
 	int screenWidth = 1280;
 	int screenHeight = 800;
 
 	SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE);
-	InitWindow(screenWidth, screenHeight, "LD5- Mindrage");
+	InitWindow(screenWidth, screenHeight, "LD59 - Mindrage");
 	rlImGuiSetup(true);
 
-	Texture image = LoadTexture("resources/parrots.png");
-
-	// Main game loop
-	while (!WindowShouldClose())    // Detect window close button or ESC key
+	while (!WindowShouldClose()) 
 	{
 		BeginDrawing();
 		ClearBackground(DARKGRAY);
 
-		// start ImGui Conent
 		rlImGuiBegin();
 
 		ImGui::ShowDemoWindow();
 
-		ImGui::End();
-
 		rlImGuiEnd();
 		EndDrawing();
-		//----------------------------------------------------------------------------------
 	}
 
-	// De-Initialization
-	//--------------------------------------------------------------------------------------   
     rlImGuiShutdown();
-	UnloadTexture(image);
-	CloseWindow();        // Close window and OpenGL context
-	//--------------------------------------------------------------------------------------
-
+	CloseWindow();
 	return 0;
 }
